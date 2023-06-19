@@ -1,9 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Button, Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const App = () => {
-    const [change, setChange] = useState(0)
     const [num, setNum] = useState(0)
+    const getData = async () => {
+        try {
+            const jsonValue = await AsyncStorage.getItem('counter')
+            let data = null
+            data = JSON.parse(jsonValue)
+            setNum(data)
+
+        } catch (e) {
+            console.log("error in getData ")
+            console.dir(e)
+        }
+    }
+
+    const storeData = async (value) => {
+        try {
+            const jsonValue = JSON.stringify(value)
+            await AsyncStorage.setItem('counter', jsonValue)
+        } catch (e) {
+            console.log("error in storeData ")
+            console.dir(e)
+        }
+    }
+
+    useEffect(() => { getData() }, [])
+
     return (
         <View>
             <Text style={{ fontSize: 40 }}>
@@ -15,23 +40,38 @@ const App = () => {
             <View style={{ flex: 1, flexDirection: 'row' }} >
                 <Button
                     title="Action"
-                    onPress={() => { setChange(change + 1), setNum(num + 1) }}
+                    onPress={() => {
+                        setNum(num + 1);
+                        storeData(num + 1);
+                    }}
                 />
                 <Button
                     title="Love"
-                    onPress={() => [setChange(change + 5), setNum(num + 1)]}
+                    onPress={() => {
+                        setNum(num + 1);
+                        storeData(num + 1);
+                    }}
                 />
                 <Button
                     title="Thrill"
-                    onPress={() => [setChange(change + 10), setNum(num + 1)]}
+                    onPress={() => {
+                        setNum(num + 1);
+                        storeData(num + 1);
+                    }}
                 />
                 <Button
                     title="History"
-                    onPress={() => [setChange(change + 25), setNum(num + 1)]}
+                    onPress={() => {
+                        setNum(num + 1);
+                        storeData(num + 1);
+                    }}
                 />
                 <Button
                     title="Fantasy"
-                    onPress={() => [setChange(change + 50), setNum(num + 1)]}
+                    onPress={() => {
+                        setNum(num + 1);
+                        storeData(num + 1);
+                    }}
                 />
             </View>
         </View>
