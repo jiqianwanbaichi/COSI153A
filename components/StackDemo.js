@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CountChange from './CountChange';
 import KeyPad from './KeyPad';
 import WatchedMovie from './WatchedMovie';
+import Phone from './Phone'
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,12 @@ const HomeScreen = ({ navigation }) => {
           navigation.navigate('CountChange')
         }
       />
+      <Button
+        title="Pick a background"
+        onPress={() =>
+          navigation.navigate('Phone')
+        }
+      />
     </View>
   );
 };
@@ -55,6 +62,7 @@ const MyStack = () => {
         <Stack.Screen name="Watched" component={WatchedMovie} />
         <Stack.Screen name="KeyPad" component={KeyPad} />
         <Stack.Screen name="CountChange" component={CountChange} />
+        <Stack.Screen name="Phone" component={Phone} />
       </Stack.Navigator>
     </NavigationContainer>
   );
